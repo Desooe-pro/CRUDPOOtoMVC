@@ -1,5 +1,7 @@
 <?php include "Header.php"?>
-    <form action="index.php?action=add" method="post" style="padding: 8px 0 16px 8px">
+    <a href="../../CRUDPOOtoMVC/index.php" style="padding-left: 8px"><button>Retour</button></a>
+    <h3 style="margin: 0; padding-left: 8px">Ajouter un produit</h3>
+    <form action="../../CRUDPOOtoMVC/index.php?action=add" method="post" style="padding: 8px 0 16px 8px">
         <label for="name">Nom :</label>
         <input type="text" id="name" name="name" required placeholder="Entrez le nom"/>
         <label for="prix">Prix :</label>
@@ -9,6 +11,7 @@
         <button type="submit">Envoyer</button>
     </form>
 <?php if(!empty($article)): ?>
+    <h2 style="text-align: center; margin-top: 0">Liste des produits</h2>
     <table>
         <thead>
         <tr>

@@ -5,17 +5,16 @@
  * Bien gérer les ressources (pattern Singleton)
  *
 */
-class Database
-{
+
+class Database {
     // Propriétés privées - instance unique de la connexion
-    private static $instance = null;
+    private static ?Database $instance = null;
 
     // Pour stocker l'objet $pdo
-    private $pdo;
+    private PDO $pdo;
 
     // Constructeur privé (Il ne peut être appelé qu'une seule fois)
-    private function __construct()
-    {
+    private function __construct() {
         // Configuration de la base de données
         $host = "localhost"; // sans le port
         $dbname = "cafthe";
@@ -23,25 +22,23 @@ class Database
         $pass = "";
 
         try {
-            $this->pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $pass);
-            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this -> pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $pass);
+            $this -> pdo -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
-            die("Erreur de connexion : " . $e->getMessage());
+            die("Erreur de connexion : " . $e -> getMessage());
         }
     }
 
-    public static function getInstance()
-    {
-        if (self::$instance === null) {
+    public static function getInstance() : ?Database {
+        if (self::$instance === null){
             self::$instance = new Database();
         }
         return self::$instance;
     }
 
-    public function getConnection()
-    {
-        // retourn l'objet PDO. Pourquoi ? Pour pouvoir faire des requêtes
-        return $this->pdo;
+    public function getConnection() : PDO {
+        // Retourne l'objet PDO. Pourquoi ? Pour pouvoir faire des requêtes
+        return $this -> pdo;
     }
 }
 

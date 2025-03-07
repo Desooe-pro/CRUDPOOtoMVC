@@ -11,7 +11,7 @@ class ProduitController {
 
     public function add() {
         $article = Produit::Ajouter($_POST["name"], $_POST["prix"], $_POST["quantite"]);
-        header("Location: index.php");
+        header("Location: index.php?action=read");
         exit();
     }
 
@@ -27,7 +27,7 @@ class ProduitController {
         $quantite = !empty($_POST["quantite"]) ? intval($_POST["quantite"]) : intval($article[0]["Quantite_Article"]);
 
         $article = Produit::Update($name, $prix, $quantite, $_GET['id']);
-        header("Location: index.php");
+        header("Location: index.php?action=read");
         exit();
     }
 
@@ -41,7 +41,7 @@ class ProduitController {
 
         if ($_POST["conf"] === "Supprimer"){
             $article = Produit::Sup($_GET['id']);
-            header("Location: index.php");
+            header("Location: index.php?action=read");
             exit();
         } else {
             header("Location: views/Sup.php?msg=Confirmation ratee : Mauvaise orthographe&id=" . $_GET['id']);
